@@ -2,7 +2,7 @@
 
 ## Introduction :
 
-This project is used to train different deep learning models (MLP, ConvNet, LeNet, AlexNet, VGG) on various datasets (MNIST, CIFAR-10, CIFAR-100, SVHN), and use Weights & Biases (wandb) to record the training and evaluation results.
+This project is used to train different deep learning models (MLP, ConvNet, LeNet, AlexNet, VGG) on various datasets (MNIST, CIFAR-10, CIFAR-100, Tiny-imagenet and SVHN), and use Weights & Biases (wandb) to record the training and evaluation results.
 
 
 

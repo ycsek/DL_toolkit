@@ -3,7 +3,7 @@ Author: Jason Shi
 Date: 01-11-2024 15:53:22
 Last Editors: Jason
 Contact Last Editors: D23090120503@cityu.edu.mo
-LastEditTime: 24-01-2025 13:49:51
+LastEditTime: 10-02-2025 10:57:05
 '''
 
 #! This module is responsible for loading and preprocessing different datasets.
@@ -18,13 +18,12 @@ import torch
 from torch.utils.data import TensorDataset
 
 
-
 def get_dataset(dataset, data_path):
     '''
-    @Description: This module is responsible for loading and preprocessing different datasets, including MNIST, CIFAR-10, CIFAR-100, and SVHN.
+    @Description: This module is responsible for loading and preprocessing different datasets, including MNIST, CIFAR-10, CIFAR-100, Tiny-imagenet and SVHN.
 
     @param:
-    name(str): The name of the dataset, including 'MNIST', 'CIFAR-10', 'CIFAR-100', and 'SVHN'.
+    name(str): The name of the dataset, including 'MNIST', 'CIFAR-10', 'CIFAR-100', 'Tiny-imagenet' and 'SVHN'.
     batch_size(int): The batch size of the dataset.
     num_workers(int): The number of workers for data loading (Number of sub-processes used to load data)
 
@@ -123,6 +122,19 @@ def get_dataset(dataset, data_path):
         dst_test = TensorDataset(images_all, labels_all)
         class_names = dst_train.classes
 
+    elif dataset == 'SVHN':
+        channel = 3
+        im_size = (32, 32)
+        num_classes = 10
+        mean = (0.4377, 0.4438, 0.4728)
+        std = (0.1980, 0.2010, 0.1970)
+        transform = transforms.Compose(
+            [transforms.ToTensor(), transforms.Normalize(mean=mean, std=std)])
+        dst_train = datasets.SVHN(
+            data_path, split='train', download=True, transform=transform)
+        dst_test = datasets.SVHN(
+            data_path, split='test', download=True, transform=transform)
+
     else:
         exit('unknown dataset: %s' % dataset)
 
@@ -131,6 +143,5 @@ def get_dataset(dataset, data_path):
 
     trainloader = torch.utils.data.DataLoader(
         dst_train, batch_size=128, shuffle=True, num_workers=2)
-    
-    return trainloader, testloader, channel, im_size, num_classes
 
+    return trainloader, testloader, channel, im_size, num_classes

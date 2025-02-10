@@ -3,7 +3,7 @@ Author: Jason Shi
 Date: 02-11-2024 13:01:37
 Last Editors: Jason
 Contact Last Editors: D23090120503@cityu.edu.mo
-LastEditTime: 24-01-2025 13:52:28
+LastEditTime: 10-02-2025 10:43:15
 '''
 
 #! main.py which is responsible for parsing the arguments and calling the training and evaluation functions.
